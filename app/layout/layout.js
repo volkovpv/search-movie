@@ -19,7 +19,25 @@
         });
     }
 
-    function layoutCtrl($scope, apiFactory){
+    function layoutCtrl($scope, apiFactory, $routeParams, $location, $window){
+
+        var routeParams = $routeParams;
+
+        $window.onpopstate = function(){
+            if(routeParams.search){
+                page = 1;
+                vm.textHeaderTwo = "Популярные фильмы!!!";
+                vm.type = "popular";
+                vm.dataInput = "";
+                vm.loadMore = true;
+                vm.totalLoad = 0;
+                vm.total = 0;
+                vm.listMovies = [];
+                vm.requestMethod(vm.type);
+                $location.search("");
+            }
+        };
+
         var vm = this,
             page = 1;
 
@@ -33,10 +51,15 @@
         vm.total = 0;
         vm.listMovies = [];
 
+        if(routeParams.search){
+            vm.dataInput = routeParams.search;
+        }
+
 
         $scope.$watch('vm.dataInput', function(){
+            var search = "";
             if(vm.dataInput) {
-                //alert(vm.dataInput);
+                search = vm.dataInput;
                 page = 1;
                 vm.textHeaderTwo = "Результат поиска";
                 vm.type = "search";
@@ -44,7 +67,10 @@
                 vm.totalLoad = 0;
                 vm.total = 0;
                 vm.listMovies = [];
-                vm.requestMethod(vm.type, vm.dataInput);
+                vm.requestMethod(vm.type, search);
+                routeParams.search = search;
+
+                $location.search(routeParams);
 
             } else {
                 page = 1;
@@ -55,6 +81,8 @@
                 vm.total = 0;
                 vm.listMovies = [];
                 vm.requestMethod(vm.type);
+                $location.search("");
+
             }
         });
 
@@ -84,30 +112,30 @@
                 return;
             }
 
-            apiFactory.searchMovies(query, page).then(
-                function(response){
-                    vm.data = response;
-                    vm.listMovies = vm.listMovies.concat(vm.data.results);
-                    vm.totalLoad += vm.data.results.length;
-                    vm.total = vm.data.total_results;
-                    page++;
-                    if(!(vm.totalLoad<vm.total)){
-                        vm.loadMore = false;
-                    }
+            if(type === "search"){
+                apiFactory.searchMovies(query, page).then(
+                    function(response){
+                        vm.data = response;
+                        vm.listMovies = vm.listMovies.concat(vm.data.results);
+                        vm.totalLoad += vm.data.results.length;
+                        vm.total = vm.data.total_results;
+                        page++;
+                        if(!(vm.totalLoad<vm.total)){
+                            vm.loadMore = false;
+                        }
 
-                    var advanced = vm.total - vm.totalLoad;
-                    if(advanced<20){
-                        vm.loadAdvanced = advanced;
-                    } else {
-                        vm.loadAdvanced = 20;
-                    }
+                        var advanced = vm.total - vm.totalLoad;
+                        if(advanced<20){
+                            vm.loadAdvanced = advanced;
+                        } else {
+                            vm.loadAdvanced = 20;
+                        }
 
-                },
-                function(response){
-                    console.log(response);
-                });
-
-
+                    },
+                    function(response){
+                        console.log(response);
+                    });
+            }
         };
 
         vm.requestMethod();

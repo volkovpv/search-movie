@@ -6,7 +6,7 @@
         </div>
         <div class="container">
             <div class="row" >
-                <div class="col-md-4" ng-repeat="movie in vm.listMovies">
+                <div class="col-md-4"  ng-repeat="movie in vm.listMovies">
                     <div class="panel panel-danger">
                         <div class="panel-heading"><h3 class="text-center">{{movie.title}}</h3></div>
                         <div class="panel-body text-center">
@@ -16,7 +16,24 @@
                     </div>
                 </div>
 
-                <div class="col-md-4" ng-show="vm.loadMore">
+
+
+                <div class="col-md-12" ng-show="!vm.listMovies.length">
+                    <div class="panel panel-danger">
+                        <div class="panel-heading"><h3 class="text-center">Ни чего не найдено</h3></div>
+                        <div class="panel-body text-center">
+                            <div class="add-movies ">
+                                <span>абсолютно ничего</span>
+                            </div>
+                        </div>
+
+                    </div>
+                </div>
+
+
+
+
+                <div class="col-md-4" ng-show="vm.loadMore && vm.listMovies.length">
                     <div class="panel panel-danger">
                         <div class="panel-heading"><h3 class="text-center">Загрузить ещё {{vm.loadAdvanced}} фильмов</h3></div>
                         <div class="panel-body text-center">
