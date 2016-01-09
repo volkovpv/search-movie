@@ -2,40 +2,19 @@
  * Created by https://github.com/volkovpv on 01.2016.
  */
 
+'use strict';
 (function () {
-
-    'use strict';
-
     angular
         .module('app')
-        .factory('apiFactory', apiFactoryFunc);
+        .factory('requestTheMovieDB', requestTheMovieDB);
 
-    function apiFactoryFunc($http, $location, $q, toaster){
-
-        var api = {
-            popularMovies: popularMovies,
-            searchMovies: searchMovies
-        };
-
-        return api;
-
-        function popularMovies(page){
-            var url = 'http://api.themoviedb.org/3/movie/popular?api_key=72b56103e43843412a992a8d64bf96e9&language=ru&page='+page;
-            return request(url)
-        }
-
-        function searchMovies(query, page){
-            var query = encodeURIComponent(query);
-            var url = 'http://api.themoviedb.org/3/search/movie?api_key=72b56103e43843412a992a8d64bf96e9&language=ru&query='+query+'&page='+page;
-            return request(url)
-        }
-
-        function request(url){
+    function requestTheMovieDB($http, $location, $q, toaster, configApi){
+        return function(url){
             var deferred = $q.defer();
 
             $http({
                 method: 'GET',
-                url: url,
+                url: configApi + url,
                 data: null,
                 headers: {
                     'Accept': 'application/json'
@@ -66,7 +45,6 @@
                     deferred.reject(response, status, headers, config);
                 }
             }).error(function (response, status, headers, config) {
-                //TODO: Добавить нотифейшины сюда(опцианально);
                 toaster.error('response');
                 toaster.error(response.message);
                 deferred.reject(response, status, headers, config);

@@ -2,26 +2,45 @@
  * Created by https://github.com/volkovpv on 01.2016.
  */
 
-'use strict';
-
 (function(){
+    'use strict';
     angular
         .module('app.layout')
-        .config(routerConfig)
         .controller('LayoutCtrl', layoutCtrl);
 
-    function routerConfig($routeProvider, $locationProvider) {
-        $routeProvider.when('/', {
-            templateUrl: 'layout/main.html',
-            controller: 'LayoutCtrl',
-            controllerAs: 'vm',
-            reloadOnSearch: false
-        });
-    }
 
-    function layoutCtrl($scope, apiFactory, $routeParams, $location, $window){
+    function layoutCtrl($scope, movies, $routeParams, $location, $window){
 
-        var routeParams = $routeParams;
+        var vm          = this,
+            routeParams = $routeParams,
+            page        = 1;
+
+        vm.href = "http://image.tmdb.org/t/p/w185/";
+        vm.type = "popular";
+        vm.dataInput = "";
+        vm.textHeaderTwo = "Популярные фильмы!!!";
+        vm.loadAdvanced = 20;
+        vm.loadMore = true;
+        vm.totalLoad = 0;
+        vm.total = 0;
+        vm.listMovies = [];
+
+        vm.startPage = function(){
+            page = 1;
+            vm.textHeaderTwo = "Популярные фильмы!!!";
+            vm.type = "popular";
+            vm.dataInput = "";
+            vm.loadMore = true;
+            vm.totalLoad = 0;
+            vm.total = 0;
+            vm.listMovies = [];
+            vm.requestMethod(vm.type);
+            $location.search("");
+        };
+
+        vm.openPopUp = function(idMovie){
+            alert(idMovie);
+        };
 
         $window.onpopstate = function(){
             if(routeParams.search){
@@ -37,19 +56,6 @@
                 $location.search("");
             }
         };
-
-        var vm = this,
-            page = 1;
-
-        vm.href = "http://image.tmdb.org/t/p/w185/";
-        vm.type = "popular";
-        vm.dataInput = "";
-        vm.textHeaderTwo = "Популярные фильмы!!!";
-        vm.loadAdvanced = 20;
-        vm.loadMore = true;
-        vm.totalLoad = 0;
-        vm.total = 0;
-        vm.listMovies = [];
 
         if(routeParams.search){
             vm.dataInput = routeParams.search;
@@ -88,7 +94,7 @@
 
         vm.requestMethod = function(type, query){
             if(type === "popular"){
-                apiFactory.popularMovies(page).then(
+                movies.popularMovies(page).then(
                     function(response){
                         vm.data = response;
                         vm.listMovies = vm.listMovies.concat(vm.data.results);
@@ -113,7 +119,7 @@
             }
 
             if(type === "search"){
-                apiFactory.searchMovies(query, page).then(
+                movies.searchMovies(query, page).then(
                     function(response){
                         vm.data = response;
                         vm.listMovies = vm.listMovies.concat(vm.data.results);

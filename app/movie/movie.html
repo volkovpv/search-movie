@@ -1,0 +1,84 @@
+<main>
+    <ng-include src="'movie/header.html'"></ng-include>
+    <div class="wrap wrap-movie">
+        <div class="container">
+            <div class="row">
+                <div class="col-md-3">
+                    <img src="{{vm.href+vm.poster_path}}" alt="{{vm.title}}">
+                </div>
+                <div class="col-md-6">
+                    <div class="row" ng-show="vm.release_date | filterDate: 'Year'">
+                        <span class="col-md-2">Год</span>
+                        <span class="col-md-10">{{vm.release_date | filterDate: 'Year'}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.coutries">
+                        <span class="col-md-2">Страна</span>
+                        <span class="col-md-10">{{vm.coutries | enumData}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.tagline">
+                        <span class="col-md-2">Слоган</span>
+                        <span class="col-md-10">{{vm.tagline}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.crew | crew:'Director'">
+                        <span class="col-md-2">Режиссер</span>
+                        <span class="col-md-10">{{vm.crew | crew:'Director'}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.crew | crew:'Screenplay'">
+                        <span class="col-md-2">Cценарий</span>
+                        <span class="col-md-10">{{vm.crew | crew:'Screenplay'}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.crew | crew:'Producer'">
+                        <span class="col-md-2">Продюсер</span>
+                        <span class="col-md-10">{{vm.crew | crew:'Producer'}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.crew | crew:'Director of Photography'">
+                        <span class="col-md-2">Оператор</span>
+                        <span class="col-md-10">{{vm.crew | crew:'Director of Photography'}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.crew | crew:'Original Music Composer'">
+                        <span class="col-md-2">Kомпозитор</span>
+                        <span class="col-md-10">{{vm.crew | crew:'Original Music Composer'}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.crew | crew:'Production Design'">
+                        <span class="col-md-2">Художник</span>
+                        <span class="col-md-10">{{vm.crew | crew:'Production Design'}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.crew | crew:'Editor'">
+                        <span class="col-md-2">Монтаж</span>
+                        <span class="col-md-10">{{vm.crew | crew:'Editor'}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.genres | enumData">
+                        <span class="col-md-2">Жанр</span>
+                        <span class="col-md-10">{{vm.genres | enumData}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.budget">
+                        <span class="col-md-2">Бюджет</span>
+                        <span class="col-md-10">{{vm.budget | currency:undefined:0}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.revenue">
+                        <span class="col-md-2">Сборы</span>
+                        <span class="col-md-10">{{vm.revenue | currency:undefined:0}}</span>
+                    </div>
+                    <div class="row" ng-show="vm.release_date | filterDate:'RussianCulture'">
+                        <span class="col-md-2">Премьера</span>
+                        <span class="col-md-10">{{vm.release_date | filterDate:'RussianCulture'}}</span>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <h3>В ролях:</h3>
+                    <ul>
+                        <li ng-repeat="cast in vm.cast">{{cast.name}}</li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+
+
+
+
+
+        <ng-include src="'movie/tab.html'"></ng-include>
+
+
+    </div>
+</main>

@@ -7,10 +7,12 @@
 
     angular.module('app', [
         'toaster',
-        'app.core',
-        'app.layout'
+        'ui.bootstrap',
 
+        'app.core',
+        'app.layout',
+        'app.movie'
     ]);
 })();
 
-// 'app.layout'
+//'youtube-embed',

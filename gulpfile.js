@@ -13,7 +13,7 @@ var gulp        = require('gulp'),
 
 //build js file
 gulp.task('build_js', function () {
-    gulp.src(['app/**/app.module.js', 'app/**/*.factory.js', 'app/**/*.module.js',  'app/**/*.js'])
+    gulp.src(['app/**/app.module.js', 'app/components/angular-youtube-embed.js', 'app/**/*.factory.js', 'app/**/*.service.js', 'app/**/*.module.js',  'app/**/*.js'])
         .pipe(sourcemaps.init())
         .pipe(concat('./www/js/app.js'))
         .pipe(ngAnnotate())

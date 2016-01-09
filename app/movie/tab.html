@@ -1,0 +1,32 @@
+<div class="container">
+    <uib-tabset justified="true">
+        <uib-tab heading="Релизы">
+
+            <table class="table table-striped">
+
+                <thead>
+                    <tr>
+                        <td>Страна</td>
+                        <td>Дата премьеры</td>
+                    </tr>
+                </thead>
+
+                <tbody>
+                    <tr ng-repeat="release in vm.release_date">
+                        <td>{{release.iso_3166_1 | countryDecoding}}</td>
+                        <td>{{release.release_date}}</td>
+                    </tr>
+                </tbody>
+            </table>
+
+
+        </uib-tab>
+        <uib-tab heading="Видео">
+            kkkk
+            <!--<youtube-video video-id="'sMKoNBRZM1M'"></youtube-video>-->
+        </uib-tab>
+        <uib-tab heading="Переводы">Long Labeled Justified content</uib-tab>
+        <uib-tab heading="Похожие фильмы">Long Labeled Justified content</uib-tab>
+        <uib-tab heading="Отзывы">Long Labeled Justified content</uib-tab>
+    </uib-tabset>
+</div>
