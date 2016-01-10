@@ -24,6 +24,8 @@
             $route.reload();
         };
 
+        vm.requestMethod();
+
         function requestMethod(){
             requestSimilar(idMovie);
 
@@ -53,6 +55,7 @@
 
             function successReviews(response){
                 var data = response;
+                vm.resultsReviews = data.results;
             }
 
             function successTranslations(response){
@@ -124,6 +127,6 @@
         }
 
 
-        vm.requestMethod();
+
     }
 })();

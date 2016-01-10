@@ -79,6 +79,22 @@
                 </tfoot>
             </table>
         </uib-tab>
-        <uib-tab heading="Отзывы">Long Labeled Justified content</uib-tab>
+        <uib-tab heading="Отзывы">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Автор</td>
+                    <td>Комментарий</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="review in vm.resultsReviews">
+                    <td>{{review.author}}</td>
+                    <td>{{review.content}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </uib-tab>
     </uib-tabset>
 </div>
