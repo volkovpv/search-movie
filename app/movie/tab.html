@@ -14,7 +14,7 @@
                 <tbody>
                     <tr ng-repeat="release in vm.release_date">
                         <td>{{release.iso_3166_1 | countryDecoding}}</td>
-                        <td>{{release.release_date}}</td>
+                        <td>{{release.release_date | filterDate:'RussianCulture'}}</td>
                     </tr>
                 </tbody>
             </table>
@@ -22,15 +22,63 @@
 
         </uib-tab>
         <uib-tab heading="Видео">
-            <div class="row">
+            <div class="row" show-grid>
                 <div class="col-md-offset-2 col-lg-offset-2 col-lg-8 col-sm-8" ng-repeat="video in vm.videoYoutube">
                     <div youtube-video code="video.key"></div>
                 </div>
             </div>
 
         </uib-tab>
-        <uib-tab heading="Переводы">Long Labeled Justified content</uib-tab>
-        <uib-tab heading="Похожие фильмы">Long Labeled Justified content</uib-tab>
+        <uib-tab heading="Переводы">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Анг.назавание</td>
+                    <td>Месное название</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="translation in vm.translations">
+                    <td>{{translation.english_name}}</td>
+                    <td>{{translation.name}}</td>
+                </tr>
+                </tbody>
+            </table>
+        </uib-tab>
+        <uib-tab heading="Похожие фильмы">
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <td>Картинка</td>
+                    <td>Название</td>
+                    <td>Краткое описание</td>
+                </tr>
+                </thead>
+
+                <tbody>
+                <tr ng-repeat="similar in vm.resultsSimilar">
+                    <td><a href="/movie?movie={{similar.id}}" ng-click="vm.reloadPage(similar.id)"><img src="{{vm.href+similar.poster_path}}" alt="{{similar.title}}" height="150px"></a></td>
+                    <td><a href="/movie?movie={{similar.id}}" ng-click="vm.reloadPage(similar.id)">{{similar.title}}</a></td>
+                    <td>{{similar.overview}}</td>
+                </tr>
+                </tbody>
+                <tfoot>
+                <tr  ng-show="vm.showBoton">
+                    <td colspan="3" class="footer-similar">
+                        <span class="b-ico-round" ng-click="vm.requestSimilar(vm.idMovie)"></span>
+                        <span>Загрузить ещё {{vm.loadAdvanced}}</span>
+                    </td>
+
+                </tr>
+                <tr>
+                    <td colspan="3" class="footer-similar total">
+                        <span>Загруженно {{vm.totalLoad}} из {{vm.total}}</span>
+                    </td>
+                </tr>
+                </tfoot>
+            </table>
+        </uib-tab>
         <uib-tab heading="Отзывы">Long Labeled Justified content</uib-tab>
     </uib-tabset>
 </div>

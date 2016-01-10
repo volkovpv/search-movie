@@ -34,8 +34,8 @@
             return requestTheMovieDB(uri)
         };
 
-        this.similar = function(id){
-            var uri = '/movie/'+id+'/similar?api_key=72b56103e43843412a992a8d64bf96e9&language=ru';
+        this.similar = function(id, page){
+            var uri = '/movie/'+id+'/similar?api_key=72b56103e43843412a992a8d64bf96e9&language=ru&page='+page;
             return requestTheMovieDB(uri)
         };
 
