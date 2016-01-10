@@ -89,6 +89,8 @@
                 vm.tagline = data.tagline;
                 vm.budget = data.budget;
                 vm.revenue = data.revenue;
+                vm.overview = data.overview;
+                vm.runtime = data.runtime;
 
             }
 

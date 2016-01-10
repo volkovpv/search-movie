@@ -63,6 +63,13 @@
                         <span class="col-md-2">Премьера</span>
                         <span class="col-md-10">{{vm.release_date | filterDate:'RussianCulture'}}</span>
                     </div>
+                    <div class="row" ng-show="vm.runtime">
+                        <span class="col-md-2">Время</span>
+                        <span class="col-md-10">{{vm.runtime}} мин. / {{vm.runtime|timeFilter}}</span>
+                    </div>
+                    <div class="row">
+                        <p>{{vm.overview}}</p>
+                    </div>
                 </div>
                 <div class="col-md-3">
                     <h3>В ролях:</h3>
