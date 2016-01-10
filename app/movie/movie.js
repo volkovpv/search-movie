@@ -56,12 +56,12 @@
 
             function successVideos(response){
                 var data = response;
+                vm.videoYoutube = data.results;
             }
 
             function successReleases(response){
                 var data = response;
                 vm.release_date = data.countries;
-                //var release_date = data.countries[i].release_date;
             }
 
             function successCredits(response){

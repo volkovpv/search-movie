@@ -22,8 +22,12 @@
 
         </uib-tab>
         <uib-tab heading="Видео">
-            kkkk
-            <!--<youtube-video video-id="'sMKoNBRZM1M'"></youtube-video>-->
+            <div class="row">
+                <div class="col-md-offset-2 col-lg-offset-2 col-lg-8 col-sm-8" ng-repeat="video in vm.videoYoutube">
+                    <div youtube-video code="video.key"></div>
+                </div>
+            </div>
+
         </uib-tab>
         <uib-tab heading="Переводы">Long Labeled Justified content</uib-tab>
         <uib-tab heading="Похожие фильмы">Long Labeled Justified content</uib-tab>

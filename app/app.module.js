@@ -8,11 +8,8 @@
     angular.module('app', [
         'toaster',
         'ui.bootstrap',
-
         'app.core',
         'app.layout',
         'app.movie'
     ]);
 })();
-
-//'youtube-embed',
