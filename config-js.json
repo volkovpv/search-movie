@@ -1,12 +1,22 @@
 {
   "src": [
-    "app/**/app.module.js",
-    "app/**/*.provider.js",
-    "app/**/*.factory.js",
-    "app/**/*.service.js",
-    "app/**/*.filter.js",
-    "app/**/*.directive.js",
-    "app/**/*.module.js",
-    "app/**/*.js"
+    "app/app.module.js",
+    "app/components/configApi.provider.js",
+    "app/components/requestTheMovieDB.factory.js",
+    "app/components/services/detailsMovie.service.js",
+    "app/components/services/movies.service.js",
+    "app/components/filters/countryDecoding.filter.js",
+    "app/components/filters/crew.filter.js",
+    "app/components/filters/date.filter.js",
+    "app/components/filters/enumData.filter.js",
+    "app/components/filters/time.filter.js",
+    "app/components/copyright.directive.js",
+    "app/components/youtubeVideo.directive.js",
+    "app/core/core.module.js",
+    "app/layout/layout.module.js",
+    "app/movie/movie.module.js",
+    "app/core/core.config.js",
+    "app/layout/layout.js",
+    "app/movie/movie.js"
   ]
 }

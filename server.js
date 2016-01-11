@@ -1,7 +1,12 @@
 var serverFactory   = require('spa-server'),
     open            = require('open'),
     _fs             = require('fs'),
-    fileSystem       = require('file-system');
+    mkdirp          = require('mkdirp'),
+    uglyfyJS        = require('uglify-js'),
+    srcJsFile       = require('./config-js.json');
+
+var FILE_ENCODING = 'utf-8',
+    EOL = '\n';
 
 var server = serverFactory.create({
     path: './www/',
@@ -11,54 +16,38 @@ var server = serverFactory.create({
     }
 });
 
+function concat() {
+    var distPath = 'www/js/app.js';
+    var out = srcJsFile.src.map(function(filePath){
+        return _fs.readFileSync(filePath, FILE_ENCODING);
+    });
 
-var FILE_ENCODING = 'utf-8',
-    EOL = '\n';
-
-
-function concat(opts) {
-    fileSystem.recurse('./', ['app/**/app.module.js', 'app/**/*.provider.js', 'app/**/*.factory.js', 'app/**/*.service.js', 'app/**/*.filter.js', 'app/**/*.directive.js', 'app/**/*.module.js',  'app/**/*.js'], function(filepath, relative, filename) {
-        if (filename) {
-            console.log(filepath);
-            console.log(relative);
-            console.log(filename);
-            console.log("==========");
+    mkdirp('./www/js', function (err) {
+        if (err) {
+            console.error(err);
         } else {
-            console.log("++++++++");
-            console.log(filepath);
-            console.log(relative);
-            console.log(filename);
+            _fs.writeFileSync(distPath, out.join(EOL), FILE_ENCODING);
+
+            var result = uglyfyJS.minify(distPath, {
+                mangle: true,
+                compress: {
+                    sequences: true,
+                    dead_code: true,
+                    conditionals: true,
+                    booleans: true,
+                    unused: true,
+                    if_return: true,
+                    join_vars: true,
+                    drop_console: true
+                }
+            });
+
+            _fs.writeFileSync('www/js/app.mini.js', result.code);
         }
     });
-
-
-    var fileList = opts.src;
-    var distPath = opts.dest;
-    var out = fileList.map(function(filePath){
-        //return _fs.readFileSync(filePath, FILE_ENCODING);
-        fileSystem.recurse('path', ['**/*.js'], function(filepath, relative, filename) {
-            if (filename) {
-                console.log(filepath);
-                console.log(relative);
-                console.log(filename);
-                console.log("==========");
-            } else {
-                console.log(filepath);
-                console.log(relative);
-                console.log(filename);
-            }
-        });
-    });
-
-    _fs.writeFileSync(distPath, out.join(EOL), FILE_ENCODING);
-    console.log(' '+ distPath +' built.');
 }
 
-concat({
-    src : ['app/*.js'],
-    dest : 'www/concatenatedFile.js'
-});
-
-//server.start();
-//open("http://localhost:8001/", "chrome");
+concat();
+server.start();
+open("http://localhost:8001/", "chrome");
  
