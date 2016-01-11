@@ -1,0 +1,12 @@
+{
+  "src": [
+    "app/**/app.module.js",
+    "app/**/*.provider.js",
+    "app/**/*.factory.js",
+    "app/**/*.service.js",
+    "app/**/*.filter.js",
+    "app/**/*.directive.js",
+    "app/**/*.module.js",
+    "app/**/*.js"
+  ]
+}

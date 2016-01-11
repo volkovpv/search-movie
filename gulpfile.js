@@ -9,11 +9,13 @@ var gulp        = require('gulp'),
     uglify      = require('gulp-uglify'),
     liveReload  = require('gulp-livereload'),
     sass        = require('gulp-sass'),
-    ngAnnotate  = require('gulp-ng-annotate');
+    ngAnnotate  = require('gulp-ng-annotate'),
+    srcJsFile   = require('./config-js.json');
 
 //build js file
+//исходники js фалов были вынесены в конфигурационный файл для того, что бы можно было собирать их в опеределённой последовательности как и в dev среде, так и в prod
 gulp.task('build_js', function () {
-    gulp.src(['app/**/app.module.js', 'app/**/*.provider.js', 'app/**/*.factory.js', 'app/**/*.service.js', 'app/**/*.filter.js', 'app/**/*.directive.js', 'app/**/*.module.js',  'app/**/*.js'])
+    gulp.src(srcJsFile.src)
         .pipe(sourcemaps.init())
         .pipe(concat('./www/js/app.js'))
         .pipe(ngAnnotate())
@@ -37,6 +39,12 @@ gulp.task('sass', function () {
         .pipe(gulp.dest('./www/style'));
 });
 
+//img
+gulp.task('img', function(){
+    gulp.src('./app/assets/img/**')
+        .pipe(gulp.dest('./www/img'));
+});
+
 //copy .htaccess
 //нужен только в том случает если приложение открывается с сервера Apache
 gulp.task('copy_htaccess', function(){
@@ -44,7 +52,7 @@ gulp.task('copy_htaccess', function(){
         .pipe(gulp.dest('./www/'));
 });
 
-gulp.task('watch', ['build_js', 'copy_html', 'sass', 'copy_htaccess'], function() {
+gulp.task('watch', ['build_js', 'copy_html', 'sass', 'copy_htaccess', 'img'], function() {
     liveReload({ start: true });
 
     gulp.watch('./app/**/*.html', ['copy_html']);

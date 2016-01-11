@@ -75,17 +75,21 @@
                     <h3>В ролях:</h3>
                     <ul>
                         <li ng-repeat="cast in vm.cast">{{cast.name}}</li>
+                        <li ng-show="vm.showMoreCast" ng-click="vm.getMoreCast()" class="show-more-cast">...</li>
                     </ul>
                 </div>
             </div>
         </div>
-
-
-
-
-
         <ng-include src="'movie/tab.html'"></ng-include>
-
-
     </div>
+
+    <footer class="navbar navbar-fixed-bottom navbar-total">
+        <div class="container">
+            <div class="row footer-text">
+                <div class="col-md-6" copyright-dir></div>
+                <div class="col-md-6 text-right"></div>
+            </div>
+
+        </div>
+    </footer>
 </main>

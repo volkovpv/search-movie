@@ -2,9 +2,8 @@
  * Created by https://github.com/volkovpv on 01.2016.
  */
 
-'use strict';
-
 (function () {
+    'use strict';
     angular
         .module('app')
         .provider('configApi', configApi);

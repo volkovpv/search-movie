@@ -11,6 +11,7 @@
         var vm = this;
         var idMovie = $location.search().movie;
         var page = 1;
+        var cast = [];
 
         vm.href = "http://image.tmdb.org/t/p/w185/";
         vm.requestSimilar = requestSimilar;
@@ -18,6 +19,8 @@
         vm.idMovie = idMovie;
         vm.resultsSimilar = [];
         vm.showBoton = true;
+        vm.showMoreCast = false;
+        vm.getMoreCast = getMoreCast;
 
         vm.reloadPage = function(id){
             $route.updateParams({movie: id});
@@ -76,7 +79,9 @@
             function successCredits(response){
                 var data = response;
                 vm.crew = data.crew;
-                vm.cast = data.cast;
+                vm.cast = data.cast.slice(0, 10);
+                cast = data.cast;
+                if(data.cast.length > 10) vm.showMoreCast = true;
             }
 
             function successMain(response){
@@ -94,6 +99,11 @@
 
             }
 
+        }
+
+        function getMoreCast(){
+            vm.cast = cast;
+            vm.showMoreCast = false;
         }
 
 
