@@ -12,6 +12,7 @@
     "app/components/filters/time.filter.js",
     "app/components/directive/copyright.directive.js",
     "app/components/directive/youtubeVideo.directive.js",
+    "app/components/directive/backTop.directive.js",
     "app/core/core.module.js",
     "app/layout/layout.module.js",
     "app/movie/movie.module.js",
