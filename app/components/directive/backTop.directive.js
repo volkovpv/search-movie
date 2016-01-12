@@ -8,6 +8,11 @@
         .module('app')
         .directive('backTop', backTop);
 
+    /**
+     * Button "back-top"
+     * Restrict type 'EA'
+     * @return {Object}
+     */
     function backTop($window){
         return {
             restrict: 'EA',
