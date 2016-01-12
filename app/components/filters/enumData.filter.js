@@ -9,14 +9,20 @@
         .filter('enumData', enumData);
 
     function enumData(){
-        return function(data){
-            if(Array.isArray(data)){
-                var countries = data.map(function(current){
-                    return current.name;
-                });
+        return returnEnumData;
+    }
 
-                return countries.join(", ");
-            }
+    /**
+     * @param {array} data - array data
+     * @return {string} the enumeration
+     */
+    function returnEnumData(data){
+        if(Array.isArray(data)){
+            var countries = data.map(function(current){
+                return current.name;
+            });
+
+            return countries.join(", ");
         }
     }
 })();

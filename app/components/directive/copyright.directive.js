@@ -7,7 +7,11 @@
     angular
         .module('app')
         .directive('copyrightDir', copyright);
-
+    /**
+     * Template the copyright site
+     * Restrict type 'EA'
+     * @return {Object}
+     */
     function copyright(){
         return {
             restrict: 'EA',

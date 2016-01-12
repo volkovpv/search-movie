@@ -8,6 +8,11 @@
         .module('app')
         .directive('youtubeVideo', youtubeVideo);
 
+    /**
+     * Template the video from YouTube
+     * Restrict type 'EA'
+     * @return {Object}
+     */
     function youtubeVideo($sce){
         return {
             restrict: 'EA',

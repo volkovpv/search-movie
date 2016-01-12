@@ -8,61 +8,51 @@
         .module('app.layout')
         .controller('LayoutCtrl', layoutCtrl);
 
-
-    function layoutCtrl($scope, movies, $routeParams, $location, $window){
-
+    /**
+     * @param {object} $scope
+     * @param {object} $routeParams
+     * @param {object} $location - window.location
+     * @param {object} $window - window object
+     * @param {object} movies - service
+     * @param {object} configApi - provider
+     */
+    function layoutCtrl($scope, $routeParams, $location, $window, movies, configApi){
         var vm          = this,
             routeParams = $routeParams,
             page        = 1;
 
-        vm.href = "http://image.tmdb.org/t/p/w185/";
-        vm.type = "popular";
-        vm.dataInput = "";
-        vm.textHeaderTwo = "Популярные фильмы!!!";
-        vm.loadAdvanced = 20;
-        vm.loadMore = true;
-        vm.totalLoad = 0;
-        vm.total = 0;
-        vm.listMovies = [];
+        vm.href             = configApi.img;
+        vm.loadAdvanced     = 20;
+        vm.startPage        = start;
+        vm.requestMethod    = request;
+        vm.textHeaderTwo    = "Популярные фильмы.";
+        vm.type             = "popular";
+        vm.dataInput        = "";
+        vm.loadMore         = true;
+        vm.totalLoad        = 0;
+        vm.total            = 0;
+        vm.listMovies       = [];
+        vm.data             = "";
 
-        vm.startPage = function(){
-            page = 1;
-            vm.textHeaderTwo = "Популярные фильмы!!!";
-            vm.type = "popular";
-            vm.dataInput = "";
-            vm.loadMore = true;
-            vm.totalLoad = 0;
-            vm.total = 0;
-            vm.listMovies = [];
-            vm.requestMethod(vm.type);
-            $location.search("");
-        };
 
-        vm.openPopUp = function(idMovie){
-            alert(idMovie);
-        };
-
-        $window.onpopstate = function(){
-            if(routeParams.search){
-                page = 1;
-                vm.textHeaderTwo = "Популярные фильмы!!!";
-                vm.type = "popular";
-                vm.dataInput = "";
-                vm.loadMore = true;
-                vm.totalLoad = 0;
-                vm.total = 0;
-                vm.listMovies = [];
-                vm.requestMethod(vm.type);
-                $location.search("");
-            }
-        };
+        $window.onpopstate = actionHistory;
 
         if(routeParams.search){
             vm.dataInput = routeParams.search;
         }
 
+        $scope.$watch('vm.dataInput', search);
 
-        $scope.$watch('vm.dataInput', function(){
+        /**
+         * if routeParams.search is empty, then show the popular movies
+         */
+        function actionHistory(){
+            if(!routeParams.search){
+                vm.startPage();
+            }
+        }
+
+        function search(){
             var search = "";
             if(vm.dataInput) {
                 search = vm.dataInput;
@@ -79,23 +69,20 @@
                 $location.search(routeParams);
 
             } else {
-                page = 1;
-                vm.textHeaderTwo = "Популярные фильмы!!!";
-                vm.type = "popular";
-                vm.loadMore = true;
-                vm.totalLoad = 0;
-                vm.total = 0;
-                vm.listMovies = [];
-                vm.requestMethod(vm.type);
-                $location.search("");
-
+                vm.startPage();
             }
-        });
+        }
 
-        vm.requestMethod = function(type, query){
+        /**
+         * @param {string} type - type page
+         * @param {string} query - search query
+         */
+        function request(type, query){
             if(type === "popular"){
                 movies.popularMovies(page).then(
                     function(response){
+                        var advanced = 0;
+
                         vm.data = response;
                         vm.listMovies = vm.listMovies.concat(vm.data.results);
                         vm.totalLoad += vm.data.results.length;
@@ -105,7 +92,7 @@
                             vm.loadMore = false;
                         }
 
-                        var advanced = vm.total - vm.totalLoad;
+                        advanced = vm.total - vm.totalLoad;
                         if(advanced<20){
                             vm.loadAdvanced = advanced;
                         } else {
@@ -121,6 +108,8 @@
             if(type === "search"){
                 movies.searchMovies(query, page).then(
                     function(response){
+                        var advanced = 0;
+
                         vm.data = response;
                         vm.listMovies = vm.listMovies.concat(vm.data.results);
                         vm.totalLoad += vm.data.results.length;
@@ -130,7 +119,7 @@
                             vm.loadMore = false;
                         }
 
-                        var advanced = vm.total - vm.totalLoad;
+                        advanced = vm.total - vm.totalLoad;
                         if(advanced<20){
                             vm.loadAdvanced = advanced;
                         } else {
@@ -142,11 +131,19 @@
                         console.log(response);
                     });
             }
-        };
+        }
 
-        vm.requestMethod();
-
-
-
+        function start(){
+            page = 1;
+            vm.textHeaderTwo = "Популярные фильмы.";
+            vm.type = "popular";
+            vm.dataInput = "";
+            vm.loadMore = true;
+            vm.totalLoad = 0;
+            vm.total = 0;
+            vm.listMovies = [];
+            vm.requestMethod(vm.type);
+            $location.search("");
+        }
     }
 })();

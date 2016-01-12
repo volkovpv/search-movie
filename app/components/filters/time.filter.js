@@ -9,16 +9,22 @@
         .filter('timeFilter', timeFilter);
 
     function timeFilter(){
-        return function(data){
-            var h = data / 60 ^ 0;
-            if (h) {
-                var m = data % 60;
-                if (m < 10) m = '0' + m;
-                data = h + ':' + m;
-            }
-            return data;
+        return returnTimeFilter;
+    }
 
+    /**
+     * @param {string} time - the time in minutes
+     * @return {string} the time in format HH:MM
+     */
+    function returnTimeFilter(time){
+        var h = time / 60 ^ 0;
+        if (h) {
+            var m = time % 60;
+            if (m < 10) m = '0' + m;
+            time = h + ':' + m;
         }
+        return time;
+
     }
 })();
 

@@ -8,7 +8,10 @@
         .module('app.core')
         .config(routerConfig);
 
-    /* @ngInject */
+    /**
+    * @param {object} $routeProvider
+    * @param {object} $locationProvider
+    */
     function routerConfig($routeProvider, $locationProvider) {
 
         $locationProvider.html5Mode(true);

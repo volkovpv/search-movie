@@ -9,20 +9,26 @@
         .filter('crew', crew);
 
     function crew(){
-        return function(data, type){
-            if(Array.isArray(data)){
-                var i           = data.length,
-                    directors   = [];
+        return returnCrew;
+    }
 
-                while(i--){
-                    if(data[i].job === type){
-                        directors.push(data[i].name);
-                    }
+    /**
+     * @param {array} data - crew
+     * @param {string} type - type job
+     * @return {string} the enumeration of crew
+     */
+    function returnCrew(data, type){
+        if(Array.isArray(data)){
+            var i           = data.length,
+                directors   = [];
+
+            while(i--){
+                if(data[i].job === type){
+                    directors.push(data[i].name);
                 }
-
-                return directors.join(", ");
             }
 
+            return directors.join(", ");
         }
     }
 })();

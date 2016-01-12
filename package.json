@@ -35,11 +35,13 @@
   },
   "scripts": {
     "prestart": "npm install && npm run build",
+
     "build": "npm run build-css && npm run build-img && npm run build-index-html && npm run build-html",
     "build-css": "node-sass --include-path scss ./app/assets/style/style.scss ./www/style/style.css",
     "build-img": "cpy ./app/assets/img/*  ./www/img/",
     "build-index-html": "cpy ./app/index.html  ./www/",
     "build-html": "cpy ./**/*.html  ../www/ --parents --cwd=app",
+
     "start": "node server",
     "test": "echo \"Error: no test specified\" && exit 1"
   }

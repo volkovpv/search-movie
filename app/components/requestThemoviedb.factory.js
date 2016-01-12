@@ -8,13 +8,23 @@
         .module('app')
         .factory('requestTheMovieDB', requestTheMovieDB);
 
-    function requestTheMovieDB($http, $location, $q, toaster, configApi){
+    /**
+     * @param {function} $http - HTTP servers
+     * @param {object} $q - Promise
+     * @param {object} toaster - non-blocking notification
+     * @param {object} configApi - provider from $get
+     */
+    function requestTheMovieDB($http, $q, toaster, configApi){
+        /**
+         * @param {string} url
+         * @return {object} deferred.promise
+         */
         return function(url){
             var deferred = $q.defer();
 
             $http({
                 method: 'GET',
-                url: configApi + url,
+                url: configApi.api + url,
                 data: null,
                 headers: {
                     'Accept': 'application/json'
