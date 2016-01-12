@@ -1,16 +1,13 @@
 <div class="container">
-    <uib-tabset justified="true">
+    <uib-tabset justified="false">
         <uib-tab heading="Релизы">
-
             <table class="table table-striped">
-
                 <thead>
                     <tr>
                         <td>Страна</td>
                         <td>Дата премьеры</td>
                     </tr>
                 </thead>
-
                 <tbody>
                     <tr ng-repeat="release in vm.release_date">
                         <td>{{release.iso_3166_1 | countryDecoding}}</td>
@@ -18,16 +15,13 @@
                     </tr>
                 </tbody>
             </table>
-
-
         </uib-tab>
         <uib-tab heading="Видео">
             <div class="row" show-grid>
-                <div class="col-md-offset-2 col-lg-offset-2 col-lg-8 col-sm-8" ng-repeat="video in vm.videoYoutube">
+                <div class="col-md-offset-2 col-lg-offset-2 col-lg-8 col-sm-8 youtube-video" ng-repeat="video in vm.videoYoutube">
                     <div youtube-video code="video.key"></div>
                 </div>
             </div>
-
         </uib-tab>
         <uib-tab heading="Переводы">
             <table class="table table-striped">

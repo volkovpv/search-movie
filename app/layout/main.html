@@ -30,12 +30,12 @@
                 <div class="col-md-4" ng-show="vm.loadMore && vm.listMovies.length">
                     <div class="panel panel-danger">
                         <div class="panel-heading"><h3 class="text-center">Загрузить ещё {{vm.loadAdvanced}} фильмов</h3></div>
-                        <div class="panel-body text-center">
-                            <div class="add-movies ">
-                                <span class="b-ico-round" ng-click="vm.requestMethod(vm.type, vm.dataInput)"></span>
+                        <div class="panel-body text-center add-movies" ng-click="vm.requestMethod(vm.type, vm.dataInput)">
+                            <div>
+                                <span class="b-ico-round" ></span>
                             </div>
                         </div>
-
+                        <div class="panel-footer"> </div>
                     </div>
                 </div>
             </div>
