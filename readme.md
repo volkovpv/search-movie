@@ -38,8 +38,20 @@
   
 ==========================================================================  
   
-#Описание решения задачи  
+#Start  
   
+##Prod start  
+- git clone https://github.com/volkovpv/search-movie.git  
+- npm start  
+  
+##Develop start  
+- git clone https://github.com/volkovpv/search-movie.git  
+- npm install -g gulp  
+- npm install    
+- gulp watch  
+  
+#Решение задачи  
+
 ##Кодастаил
 Кодастаил был взят согласно [данному соглашению](https://github.com/johnpapa/angular-styleguide/blob/master/i18n/ru-RU.md "johnpapa Руководство по стилям для AngularJS")  
 Архитектура была взята из [данного описания](http://www.johnpapa.net/angular-app-structuring-guidelines/ "Angular App Structuring Guidelines")  
