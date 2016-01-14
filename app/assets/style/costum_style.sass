@@ -5,7 +5,7 @@ h3, .h3
 header
   input
     height: 30px
-    margin-top: 35px
+    margin-top: 20px
     padding: 0 4px
     width: 100%
     border-radius: 4px
@@ -13,8 +13,15 @@ header
     border: 1px solid #ebccd1
 
 .navbar-search
-  height: 100px
+  height: 70px
   background-color: rgb(133, 210, 240)
+
+  h1
+    font-size: 18px
+
+  img
+    margin-top: 10px
+    height: 50px
 
 .navbar-total
   height: 50px
@@ -25,7 +32,7 @@ header
   margin-bottom: 0
   
 .wrap
-  margin-top: 100px
+  margin-top: 70px
   margin-bottom: 50px
 
 .wrap-movie
@@ -116,11 +123,9 @@ header
 
 //кнопка вверх
 .back-top
-  bottom: 60px
-  right: 30px
+  margin-top: 14px
   opacity: 0
   transition: all .3s ease-out
-  position: fixed
 
   button
     color: black
@@ -145,3 +150,32 @@ header
 
   button
     cursor: pointer
+
+
+
+@media(min-width: 321px)
+  .navbar-search
+    img
+      margin-top: 0
+      height: 70px
+
+@media(min-width: 769px)
+  .wrap
+    margin-top: 100px
+
+  .navbar-search
+    height: 100px
+
+    h1
+      font-size: 36px
+
+    img
+      margin-top: 0
+      height: 100px
+
+  header
+    input
+      margin-top: 35px
+
+  .back-top
+    margin-top: 29px

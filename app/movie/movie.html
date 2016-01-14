@@ -3,75 +3,79 @@
     <div class="wrap wrap-movie">
         <div class="container">
             <div class="row">
-                <div class="col-md-3">
-                    <img src="{{vm.href+vm.poster_path}}" alt="{{vm.title}}">
+                <div class="col-md-3 col-sm-3">
+                    <img src="{{vm.href+vm.poster_path}}" alt="{{vm.title}}" width="100%">
                 </div>
-                <div class="col-md-6">
+                <div class="col-md-6 col-sm-9">
                     <div class="row section-data" ng-show="vm.release_date | filterDate: 'Year'">
-                        <span class="col-md-2">Год</span>
-                        <span class="col-md-10">{{vm.release_date | filterDate: 'Year'}}</span>
+                        <span class="col-md-2 col-sm-2">Год</span>
+                        <span class="col-md-10 col-sm-10">{{vm.release_date | filterDate: 'Year'}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.coutries">
-                        <span class="col-md-2">Страна</span>
-                        <span class="col-md-10">{{vm.coutries | enumData}}</span>
+                        <span class="col-md-2 col-sm-2">Страна</span>
+                        <span class="col-md-10 col-sm-10">{{vm.coutries | enumData}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.tagline">
-                        <span class="col-md-2">Слоган</span>
-                        <span class="col-md-10">{{vm.tagline}}</span>
+                        <span class="col-md-2 col-sm-2">Слоган</span>
+                        <span class="col-md-10 col-sm-10">{{vm.tagline}}</span>
+                    </div>
+                    <div class="row section-data hidden-md hidden-lg" ng-show="vm.cast | crew:'Cast'">
+                        <span class="col-md-2 col-sm-2">Актёры</span>
+                        <span class="col-md-10 col-sm-10">{{vm.cast | crew:'Cast'}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.crew | crew:'Director'">
-                        <span class="col-md-2">Режиссер</span>
-                        <span class="col-md-10">{{vm.crew | crew:'Director'}}</span>
+                        <span class="col-md-2 col-sm-2">Режиссер</span>
+                        <span class="col-md-10 col-sm-10">{{vm.crew | crew:'Director'}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.crew | crew:'Screenplay'">
-                        <span class="col-md-2">Cценарий</span>
-                        <span class="col-md-10">{{vm.crew | crew:'Screenplay'}}</span>
+                        <span class="col-md-2 col-sm-2">Cценарий</span>
+                        <span class="col-md-10 col-sm-10">{{vm.crew | crew:'Screenplay'}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.crew | crew:'Producer'">
-                        <span class="col-md-2">Продюсер</span>
-                        <span class="col-md-10">{{vm.crew | crew:'Producer'}}</span>
+                        <span class="col-md-2 col-sm-2">Продюсер</span>
+                        <span class="col-md-10 col-sm-10">{{vm.crew | crew:'Producer'}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.crew | crew:'Director of Photography'">
-                        <span class="col-md-2">Оператор</span>
-                        <span class="col-md-10">{{vm.crew | crew:'Director of Photography'}}</span>
+                        <span class="col-md-2 col-sm-2">Оператор</span>
+                        <span class="col-md-10 col-sm-10">{{vm.crew | crew:'Director of Photography'}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.crew | crew:'Original Music Composer'">
-                        <span class="col-md-2">Kомпозитор</span>
-                        <span class="col-md-10">{{vm.crew | crew:'Original Music Composer'}}</span>
+                        <span class="col-md-2 col-sm-2">Kомпозитор</span>
+                        <span class="col-md-10 col-sm-10">{{vm.crew | crew:'Original Music Composer'}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.crew | crew:'Production Design'">
-                        <span class="col-md-2">Художник</span>
-                        <span class="col-md-10">{{vm.crew | crew:'Production Design'}}</span>
+                        <span class="col-md-2 col-sm-2">Художник</span>
+                        <span class="col-md-10 col-sm-10">{{vm.crew | crew:'Production Design'}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.crew | crew:'Editor'">
-                        <span class="col-md-2">Монтаж</span>
-                        <span class="col-md-10">{{vm.crew | crew:'Editor'}}</span>
+                        <span class="col-md-2 col-sm-2">Монтаж</span>
+                        <span class="col-md-10 col-sm-10">{{vm.crew | crew:'Editor'}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.genres | enumData">
-                        <span class="col-md-2">Жанр</span>
-                        <span class="col-md-10">{{vm.genres | enumData}}</span>
+                        <span class="col-md-2 col-sm-2">Жанр</span>
+                        <span class="col-md-10 col-sm-10">{{vm.genres | enumData}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.budget">
-                        <span class="col-md-2">Бюджет</span>
-                        <span class="col-md-10">{{vm.budget | currency:undefined:0}}</span>
+                        <span class="col-md-2 col-sm-2">Бюджет</span>
+                        <span class="col-md-10 col-sm-10">{{vm.budget | currency:undefined:0}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.revenue">
-                        <span class="col-md-2">Сборы</span>
-                        <span class="col-md-10">{{vm.revenue | currency:undefined:0}}</span>
+                        <span class="col-md-2 col-sm-2">Сборы</span>
+                        <span class="col-md-10 col-sm-10">{{vm.revenue | currency:undefined:0}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.release_date | filterDate:'RussianCulture'">
-                        <span class="col-md-2">Премьера</span>
-                        <span class="col-md-10">{{vm.release_date | filterDate:'RussianCulture'}}</span>
+                        <span class="col-md-2 col-sm-2">Премьера</span>
+                        <span class="col-md-10 col-sm-10">{{vm.release_date | filterDate:'RussianCulture'}}</span>
                     </div>
                     <div class="row section-data" ng-show="vm.runtime">
-                        <span class="col-md-2">Время</span>
-                        <span class="col-md-10">{{vm.runtime}} мин. / {{vm.runtime|timeFilter}}</span>
+                        <span class="col-md-2 col-sm-2">Время</span>
+                        <span class="col-md-10 col-sm-10">{{vm.runtime}} мин. / {{vm.runtime|timeFilter}}</span>
                     </div>
                     <div class="row  section-data">
                         <p>{{vm.overview}}</p>
                     </div>
                 </div>
-                <div class="col-md-3">
+                <div class="col-md-3 hidden-sm hidden-xs">
                     <h4>В ролях:</h4>
                     <ul class="cast list-group">
                         <li ng-repeat="cast in vm.cast">{{cast.name}}</li>
@@ -86,8 +90,8 @@
     <footer class="navbar navbar-fixed-bottom navbar-total">
         <div class="container">
             <div class="row footer-text">
-                <div class="col-md-6" copyright-dir></div>
-                <div class="col-md-6 text-right"></div>
+                <div class="col-md-6 col-sm-6 col-xs-6" copyright-dir></div>
+                <div class="col-md-6 col-sm-6 col-xs-6 text-right"></div>
             </div>
 
         </div>

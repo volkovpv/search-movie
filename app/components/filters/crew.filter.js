@@ -22,6 +22,14 @@
             var i           = data.length,
                 directors   = [];
 
+            if(type === 'Cast'){
+                while(i--){
+                    directors.push(data[i].name);
+                }
+                return directors.join(", ");
+            }
+
+
             while(i--){
                 if(data[i].job === type){
                     directors.push(data[i].name);

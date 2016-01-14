@@ -15,7 +15,7 @@
     function copyright(){
         return {
             restrict: 'EA',
-            template: '&copy; 2016 {{year}} <a target="_blank" href="https://github.com/volkovpv/search-movie">Исходники на github.com</a>',
+            template: '&copy; 2016 {{year}} <a class="hidden-xs" target="_blank" href="https://github.com/volkovpv/search-movie">Исходники на github.com</a>',
             link: function (scope) {
                 var year = new Date().getFullYear();
                 if(year !== 2016){
