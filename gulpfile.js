@@ -10,7 +10,16 @@ var gulp        = require('gulp'),
     liveReload  = require('gulp-livereload'),
     sass        = require('gulp-sass'),
     ngAnnotate  = require('gulp-ng-annotate'),
-    srcJsFile   = require('./config-js.json');
+    srcJsFile   = require('./config-js.json'),
+    spaServer             = require('spa-server');
+
+var server        = spaServer.create({
+    path: './www',
+    port: 8001,
+    fallback: {
+        'text/html' : '/index.html'
+    }
+});
 
 //build js file
 //исходники js фалов были вынесены в конфигурационный файл для того, что бы можно было собирать их в опеределённой последовательности как и в dev среде, так и в prod
@@ -54,6 +63,8 @@ gulp.task('copy_htaccess', function(){
 
 gulp.task('watch', ['build_js', 'copy_html', 'sass', 'copy_htaccess', 'img'], function() {
     liveReload({ start: true });
+
+    server.start();
 
     gulp.watch('./app/**/*.html', ['copy_html']);
     gulp.watch('./app/assets/style/**', ['sass']);
